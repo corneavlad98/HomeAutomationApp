@@ -2,14 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.androidapp">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-    <application
+    <application tools:replace="android:label"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Home Automation App"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/MainWindowTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,9 +20,11 @@
         </activity>
         <activity
             android:name=".TemperatureActivity"
-            android:theme="@style/TemperatureTheme">
+            android:theme="@style/OtherWindowsTheme" />
+        <activity
+            android:name=".CameraActivity"
+            android:theme="@style/OtherWindowsTheme" />
 
-        </activity>
     </application>
 
 </manifest>

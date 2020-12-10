@@ -4,7 +4,6 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
@@ -55,7 +54,7 @@ class TemperatureActivity : AppCompatActivity() {
         }
         myDbReference.addValueEventListener(valueListener);
 
-        val returnButton = findViewById<Button>(R.id.returnButton)
+        val returnButton = findViewById<Button>(R.id.returnButtonTemperature)
         returnButton.setOnClickListener(){
             myDbReference.removeEventListener(valueListener)
             finish();
