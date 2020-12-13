@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
+    var database = FirebaseDatabase.getInstance()
+    var myDbReference = database.getReference()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -49,5 +51,20 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "There is no package available in android", Toast.LENGTH_LONG).show();
             }
         }
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        //reset LEDs when pressing backbutton from MainActivity
+        myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
+        myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        //reset LEDs when destroying (closing) MainActivity
+        myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
+        myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
     }
 }

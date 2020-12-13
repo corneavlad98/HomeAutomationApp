@@ -2,34 +2,64 @@ package com.example.androidapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.Switch
+import android.widget.*
+
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
-
-class LEDActivity : AppCompatActivity() {
+class LEDActivity : AppCompatActivity(){
     var database = FirebaseDatabase.getInstance()
     var myDbReference = database.getReference()
-
+    private fun resetSwitches(){
+        myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
+        myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_l_e_d)
+        resetSwitches()
 
-        val switch1 = findViewById<Switch>(R.id.ledSwitch1);
-        val switch2 = findViewById<Switch>(R.id.ledSwitch2);
+        val ledSwitch1 = findViewById<Switch>(R.id.ledSwitch1);
+        val ledSwitch2 = findViewById<Switch>(R.id.ledSwitch2);
 
-        switch1.setOnClickListener(){
-            if(switch1.isChecked)
+        val rgbLedRedSwitch = findViewById<Switch>(R.id.redSwitch)
+        val rgbLedGreenSwitch = findViewById<Switch>(R.id.greenSwitch)
+        val rgbLedBlueSwitch = findViewById<Switch>(R.id.blueSwitch)
+
+        //click listeners to change Database value of normal led switches
+        ledSwitch1.setOnClickListener(){
+            if(ledSwitch1.isChecked)
                 myDbReference.child("RaspberryPi/LED/LED1").setValue(1)
             else
                 myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
         }
-        switch2.setOnClickListener(){
-            if(switch2.isChecked)
+        ledSwitch2.setOnClickListener(){
+            if(ledSwitch2.isChecked)
                 myDbReference.child("RaspberryPi/LED/LED2").setValue(1)
             else
                 myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
+        }
+
+        //click listeners to change Database value of rgb led switches
+        rgbLedRedSwitch.setOnClickListener(){
+            if(rgbLedRedSwitch.isChecked)
+                myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(1)
+            else
+                myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
+        }
+        rgbLedGreenSwitch.setOnClickListener(){
+            if(rgbLedGreenSwitch.isChecked)
+                myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(1)
+            else
+                myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
+        }
+        rgbLedBlueSwitch.setOnClickListener(){
+            if(rgbLedBlueSwitch.isChecked)
+                myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(1)
+            else
+                myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
         }
 
         val returnButton = findViewById<Button>(R.id.returnButtonLED)
@@ -37,4 +67,6 @@ class LEDActivity : AppCompatActivity() {
             finish();
         }
     }
+
+
 }

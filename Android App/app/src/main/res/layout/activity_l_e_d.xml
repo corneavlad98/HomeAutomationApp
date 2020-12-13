@@ -53,7 +53,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbarLED"
-        app:layout_constraintVertical_bias="0.286" />
+        app:layout_constraintVertical_bias="0.585"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
         android:id="@+id/ledSwitch2"
@@ -66,6 +67,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.445" />
+        app:layout_constraintVertical_bias="0.727"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/redSwitch"
+        android:layout_width="74dp"
+        android:layout_height="48dp"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:text="Red"
+        android:textColor="#CF1212"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbarLED"
+        app:layout_constraintVertical_bias="0.332"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/greenSwitch"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:text="Green"
+        android:textColor="#30CC36"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbarLED"
+        app:layout_constraintVertical_bias="0.332"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/blueSwitch"
+        android:layout_width="77dp"
+        android:layout_height="48dp"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:text="Blue"
+        android:textColor="#215CF3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbarLED"
+        app:layout_constraintVertical_bias="0.332"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

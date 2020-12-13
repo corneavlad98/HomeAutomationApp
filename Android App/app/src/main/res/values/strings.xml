@@ -1,3 +1,29 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="app_name">Android App</string>
+    <string-array name="color_items">
+        <item>
+            <font color="#ff0000">Red</font>
+        </item>
+        <item>
+            <font color="#33cc33" stroke="true">Green</font>
+        </item>
+        <item>
+            <font color="#3333ff">Blue</font>
+        </item>
+        <item>
+            <font color="#cc33ff">Magenta</font>
+        </item>
+        <item>
+            <font color="#e6e600">Yellow</font>
+        </item>
+        <item>
+            <font color="#00e6e6">Cyan</font>
+        </item>
+        <item>
+            <font color="#000000">White</font>
+        </item>
+        <item>
+            <font color="#000000">Off</font>
+        </item>
+    </string-array>
 </resources>
