@@ -10,7 +10,7 @@ sensor = Adafruit_DHT.DHT11
 
 # connected to GPIO4.
 pin = 4
-
+count = 1
 while(True):
     #Get values from DHT11 sensor
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
@@ -18,6 +18,7 @@ while(True):
         #update 'temperature' and 'humidity' children
         firebase.patch(DHT11_url + '/Temperature', {'Value*C': temperature})
         firebase.patch(DHT11_url + '/Humidity', {'Value%': humidity})
-        print("sent DHT11 info to database")
+        print("sent DHT11 info to database, count: " , count)
+        count += 1
    
 
