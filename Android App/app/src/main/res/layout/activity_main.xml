@@ -7,6 +7,21 @@
     tools:context=".MainActivity">
 
     <ImageButton
+        android:id="@+id/startLEDButton"
+        android:layout_width="130dp"
+        android:layout_height="96dp"
+        android:adjustViewBounds="true"
+        android:background="?android:selectableItemBackground"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.201"
+        app:srcCompat="@drawable/led" />
+
+    <ImageButton
         android:id="@+id/startTemperatureButton"
         android:layout_width="116dp"
         android:layout_height="88dp"
@@ -15,10 +30,10 @@
         android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.195"
+        app:layout_constraintVertical_bias="0.199"
         app:srcCompat="@drawable/temperature_icon" />
 
     <TextView
@@ -30,9 +45,26 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.172"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startTemperatureButton"
-        app:layout_constraintVertical_bias="0.081" />
+        app:layout_constraintVertical_bias="0.076" />
+
+    <TextView
+        android:id="@+id/ledIconTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="100dp"
+        android:text="LED App"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startLEDButton"
+        app:layout_constraintVertical_bias="0.057" />
 
     <Button
         android:id="@+id/startCameraButton"
@@ -57,4 +89,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temperatureIconTextView"
         app:layout_constraintVertical_bias="0.43" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,15 +13,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Temperature Activity start
         val openTemperatureButton = findViewById<ImageButton>(R.id.startTemperatureButton);
-        val temperatureIconText = findViewById<TextView>(R.id.temperatureIconTextView)
-        temperatureIconText.setText("Temperature App")
-
         openTemperatureButton.setOnClickListener(){
             val intent = Intent(this, TemperatureActivity::class.java).apply {}
             startActivity(intent)
         }
-
+        //LED Activity start
+        val openLEDButton = findViewById<ImageButton>(R.id.startLEDButton);
+        openLEDButton.setOnClickListener(){
+            val intent = Intent(this, LEDActivity::class.java).apply {}
+            startActivity(intent)
+        }
+        //Camera App start
         val openCameraButton = findViewById<Button>(R.id.startCameraButton);
         openCameraButton.setOnClickListener(){
 
@@ -33,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "There is no package available in android", Toast.LENGTH_LONG).show();
             }
         }
+        //ZWave App start
         val openZWaveButton = findViewById<Button>(R.id.startZWaveApp);
         openZWaveButton.setOnClickListener(){
 

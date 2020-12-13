@@ -11,10 +11,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-var database = FirebaseDatabase.getInstance()
-var myDbReference = database.getReference()
 
 class TemperatureActivity : AppCompatActivity() {
+    var database = FirebaseDatabase.getInstance()
+    var myDbReference = database.getReference()
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +50,6 @@ class TemperatureActivity : AppCompatActivity() {
             }
             override fun onCancelled(error: DatabaseError) {
             }
-
-
         }
         myDbReference.addValueEventListener(valueListener);
 
