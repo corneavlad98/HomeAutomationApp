@@ -6,9 +6,9 @@ Raspberry Pi is the backend of the app that runs Python scripts to send/receive 
 Firebase is used to link the two and provide real-time data about the DHT11 sensor and LEDs.
 
 Here is how the main menu of the app looks like:
-
-<img src="https://github.com/corneavlad98/HomeAutomationApp/blob/main/HomeAutomationApp.jpg" alt="Your image title" width="250"/>
-
+<p align="center">
+  <img src="https://github.com/corneavlad98/HomeAutomationApp/blob/main/HomeAutomationApp.jpg" alt="Your image title" width="250"/>
+</p>
 
 Link to demo videos: https://drive.google.com/drive/folders/132qKDnEFe9LzbR2WHRT7ukvcjjZBbYHf?usp=sharing
 
