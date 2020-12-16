@@ -8,11 +8,12 @@ firebase = firebase.FirebaseApplication(DHT11_url)
 # Adafruit_DHT.DHT22, or Adafruit_DHT.AM2302.
 sensor = Adafruit_DHT.DHT11
 
-# connected to GPIO4.
-pin = 4
+# connected to GPIO16.
+pin = 16
 count = 1
+print("entered program!")
 while(True):
-    #Get values from DHT11 sensor
+    #Get values from DHT11 sensor 
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     if humidity is not None and temperature is not None:
         #update 'temperature' and 'humidity' children
@@ -20,5 +21,7 @@ while(True):
         firebase.patch(DHT11_url + '/Humidity', {'Value%': humidity})
         print("sent DHT11 info to database, count: " , count)
         count += 1
+    else:
+        print("error getting data from sensor!")
    
 
