@@ -8,32 +8,34 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarCamera"
-        android:layout_width="418dp"
-        android:layout_height="56dp"
+        android:layout_width="415dp"
+        android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/titleTextViewCamera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="2dp"
-        android:text="Camera App"
-        android:textColor="#FDFBFB"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbarCamera"
-        app:layout_constraintStart_toEndOf="@+id/returnButtonCamera"
-        app:layout_constraintTop_toTopOf="@+id/toolbarCamera" />
+    <ImageButton
+        android:id="@+id/gearButton"
+        android:layout_width="46dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:adjustViewBounds="true"
+        android:background="?android:selectableItemBackground"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.991"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/gear"
+        tools:srcCompat="@drawable/gear" />
 
     <Button
         android:id="@+id/returnButtonCamera"
@@ -44,18 +46,43 @@
         android:background="@drawable/abc_vector_test"
         app:layout_constraintBottom_toBottomOf="@+id/toolbarCamera"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbarCamera"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintTop_toTopOf="@+id/toolbarCamera" />
 
-    <VideoView
-        android:id="@+id/videoViewCamera"
-        android:layout_width="411dp"
-        android:layout_height="466dp"
+    <WebView
+        android:id="@+id/cameraWebView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarCamera"
-        app:layout_constraintVertical_bias="0.363" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </WebView>
+
+    <TextView
+        android:id="@+id/titleTextViewCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="2dp"
+        android:text="Camera App"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbarCamera"
+        app:layout_constraintStart_toEndOf="@+id/returnButtonCamera"
+        app:layout_constraintTop_toTopOf="@+id/toolbarCamera" />
+
+    <TextView
+        android:id="@+id/textViewTest1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbarCamera"
+        app:layout_constraintVertical_bias="0.168" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

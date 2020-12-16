@@ -1,39 +1,69 @@
 package com.example.androidapp
 
-import android.net.Uri
-import android.os.Build
+import android.R.attr
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Base64
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.Button
-import android.widget.VideoView
-import androidx.annotation.RequiresApi
+import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class CameraActivity : AppCompatActivity() {
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+class CameraActivity : AppCompatActivity() {
+    var cameraUrl = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
 
-        val video = findViewById<VideoView>(R.id.videoViewCamera)
+        val webView = findViewById<WebView>(R.id.cameraWebView)
+        cameraUrl = getAddress()
+        webView.loadUrl(cameraUrl)
+        webView.settings.javaScriptEnabled = true
+        webView.webViewClient = WebViewClient()
 
-        val usernamme = "admin"
-        val password = "7A8s9d4f"
-
-        val header:HashMap<String, String> = HashMap<String, String>(1)
-        val cred = usernamme + ":" + password
-        val auth = "Basic" + Base64.encodeToString(cred.toByteArray(Charsets.UTF_8), Base64.URL_SAFE)
-        header.put("Authorization", auth)
-        video.setVideoURI(Uri.parse("http://192.168.1.123/video.cgi"), header)
-
-        //video.setVideoPath("http://192.168.1.123/video.cgi")
-        //video.setVideoPath("https://developers.google.com/training/images/tacoma_narrows.mp4")
-        video.start();
+        val test1 = findViewById<TextView>(R.id.textViewTest1)
+        test1.text = cameraUrl
+        val settingsButton = findViewById<ImageButton>(R.id.gearButton)
+        settingsButton.setOnClickListener(){
+            val intent = Intent(this, CameraSettingsActivity::class.java).apply {}
+            if (intent != null)
+                startActivity(intent)
+            else
+                Toast.makeText(this, "Error at opening Camera Settings activity!", Toast.LENGTH_LONG).show();
+        }
 
         val returnButton = findViewById<Button>(R.id.returnButtonCamera)
-        returnButton.setOnClickListener() {
+        returnButton.setOnClickListener(){
             finish();
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+
+        val webView = findViewById<WebView>(R.id.cameraWebView)
+        cameraUrl = getAddress()
+        webView.loadUrl(cameraUrl)
+        webView.settings.javaScriptEnabled = true
+        webView.webViewClient = WebViewClient()
+
+        val test1 = findViewById<TextView>(R.id.textViewTest1)
+        test1.text = cameraUrl
+    }
+
+
+    fun getAddress(): String{
+        val sharedPref = this.getSharedPreferences("URL", Context.MODE_PRIVATE)
+        val ip = sharedPref.getString("ip", "0.0.0.0")
+        val login = sharedPref.getString("login", "admin")
+        val password = sharedPref.getString("password", "admin2")
+
+        val cameraUrl = "http://$login:$password@$ip"
+        return cameraUrl
+    }
+
 }

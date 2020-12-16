@@ -15,7 +15,7 @@
         android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintHorizontal_bias="0.886"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.201"
@@ -30,64 +30,105 @@
         android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintHorizontal_bias="0.227"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.199"
         app:srcCompat="@drawable/temperature_icon" />
 
+    <ImageButton
+        android:id="@+id/startIpCameraButton"
+        android:layout_width="109dp"
+        android:layout_height="86dp"
+        android:adjustViewBounds="true"
+        android:background="?android:selectableItemBackground"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.208"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.652"
+        app:srcCompat="@drawable/cameraicon" />
+
+    <ImageButton
+        android:id="@+id/startZWaveButton"
+        android:layout_width="116dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="4dp"
+        android:adjustViewBounds="true"
+        android:background="?android:selectableItemBackground"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.844"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.654"
+        app:srcCompat="@drawable/zwavelogo" />
+
     <TextView
         android:id="@+id/temperatureIconTextView"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginBottom="100dp"
         android:text="Temperature App"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintHorizontal_bias="0.208"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startTemperatureButton"
         app:layout_constraintVertical_bias="0.076" />
 
     <TextView
+        android:id="@+id/cameraIconTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="100dp"
+        android:text="IP Camera App"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.209"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startTemperatureButton"
+        app:layout_constraintVertical_bias="0.834" />
+
+    <TextView
+        android:id="@+id/zWaveIconTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="100dp"
+        android:text="ZWave App"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.816"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startTemperatureButton"
+        app:layout_constraintVertical_bias="0.834" />
+
+    <TextView
         android:id="@+id/ledIconTextView"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="100dp"
         android:text="LED App"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintHorizontal_bias="0.833"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startLEDButton"
         app:layout_constraintVertical_bias="0.057" />
-
-    <Button
-        android:id="@+id/startCameraButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Camera"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temperatureIconTextView"
-        app:layout_constraintVertical_bias="0.43" />
-
-    <Button
-        android:id="@+id/startZWaveApp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Z-Wave"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.777"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temperatureIconTextView"
-        app:layout_constraintVertical_bias="0.43" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

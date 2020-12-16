@@ -1,6 +1,7 @@
 package com.example.androidapp
 
 import android.content.Intent
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -27,28 +28,31 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LEDActivity::class.java).apply {}
             startActivity(intent)
         }
+
         //Camera App start
-        val openCameraButton = findViewById<Button>(R.id.startCameraButton);
+        val openCameraButton = findViewById<ImageButton>(R.id.startIpCameraButton);
         openCameraButton.setOnClickListener(){
 
-            val intent = packageManager.getLaunchIntentForPackage("com.owlr.controller.dlink")
+            //val intent = packageManager.getLaunchIntentForPackage("com.owlr.controller.dlink")
+            val intent = Intent(this, CameraActivity::class.java).apply {}
+
             if (intent != null) {
                 startActivity(intent)
             }
             else {
-                Toast.makeText(this, "There is no package available in android", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error at opening camera activity!", Toast.LENGTH_LONG).show();
             }
         }
-        //ZWave App start
-        val openZWaveButton = findViewById<Button>(R.id.startZWaveApp);
+        //ZWave Website start
+        val openZWaveButton = findViewById<ImageButton>(R.id.startZWaveButton);
         openZWaveButton.setOnClickListener(){
 
-            val intent = packageManager.getLaunchIntentForPackage("de.pathec.hubapp")
+            val intent = Intent(this, ZWaveActivity::class.java).apply {}
             if (intent != null) {
                 startActivity(intent)
             }
             else {
-                Toast.makeText(this, "There is no package available in android", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error at opening ZWave activity!", Toast.LENGTH_LONG).show();
             }
         }
     }
