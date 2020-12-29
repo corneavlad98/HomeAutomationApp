@@ -19,6 +19,9 @@ class CameraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
 
+        Toast.makeText(this, "Make sure that the IP camera is plugged in and it's configured properly!", Toast.LENGTH_LONG).show();
+
+
         val webView = findViewById<WebView>(R.id.cameraWebView)
         cameraUrl = getAddress()
         webView.loadUrl(cameraUrl)

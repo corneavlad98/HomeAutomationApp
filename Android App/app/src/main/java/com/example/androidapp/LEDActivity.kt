@@ -21,6 +21,8 @@ class LEDActivity : AppCompatActivity(){
         setContentView(R.layout.activity_l_e_d)
         resetSwitches()
 
+        Toast.makeText(this, "Make sure that the LED script is running!", Toast.LENGTH_LONG).show();
+
         val ledSwitch1 = findViewById<Switch>(R.id.ledSwitch1);
         val ledSwitch2 = findViewById<Switch>(R.id.ledSwitch2);
 

@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
+import android.widget.Toast
 import android.widget.VideoView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,8 @@ class ZWaveActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_zwave)
+
+        Toast.makeText(this, "Make sure that the Z-Wave module is connected!", Toast.LENGTH_LONG).show();
 
         val webView = findViewById<WebView>(R.id.zwaveWebView)
         webView.loadUrl("https://find.z-wave.me/zboxweb/r//")

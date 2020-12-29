@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
@@ -20,6 +21,8 @@ class TemperatureActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_temperature)
+
+        Toast.makeText(this, "Make sure that the temperature script is running!", Toast.LENGTH_LONG).show();
 
         val temperatureTextView = findViewById<TextView>(R.id.textViewTemperature)
         val humidityTextView = findViewById<TextView>(R.id.textViewHumidity)
