@@ -1,5 +1,6 @@
 package com.example.androidapp
 
+import android.graphics.drawable.TransitionDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -22,26 +23,46 @@ class LEDActivity : AppCompatActivity(){
         resetSwitches()
 
         Toast.makeText(this, "Make sure that the LED script is running!", Toast.LENGTH_LONG).show();
-
-        val ledSwitch1 = findViewById<Switch>(R.id.ledSwitch1);
-        val ledSwitch2 = findViewById<Switch>(R.id.ledSwitch2);
+        val ledImageButton1 = findViewById<ImageButton>(R.id.normalLed1)
+        val ledImageButton2 = findViewById<ImageButton>(R.id.normalLed2)
 
         val rgbLedRedSwitch = findViewById<Switch>(R.id.redSwitch)
         val rgbLedGreenSwitch = findViewById<Switch>(R.id.greenSwitch)
         val rgbLedBlueSwitch = findViewById<Switch>(R.id.blueSwitch)
 
+        var pressedOnce1 = false;
         //click listeners to change Database value of normal led switches
-        ledSwitch1.setOnClickListener(){
-            if(ledSwitch1.isChecked)
+        ledImageButton1.setOnClickListener(){
+            val drawable = ledImageButton1.drawable as TransitionDrawable
+            if(!pressedOnce1)
+            {
                 myDbReference.child("RaspberryPi/LED/LED1").setValue(1)
+                drawable.startTransition(400);
+                pressedOnce1 = true;
+            }
             else
+            {
                 myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
+                drawable.reverseTransition(400);
+                pressedOnce1 = false;
+            }
         }
-        ledSwitch2.setOnClickListener(){
-            if(ledSwitch2.isChecked)
+        var pressedOnce2 = false;
+        ledImageButton2.setOnClickListener(){
+            val drawable = ledImageButton2.drawable as TransitionDrawable
+            if(!pressedOnce2)
+            {
                 myDbReference.child("RaspberryPi/LED/LED2").setValue(1)
+                drawable.startTransition(400);
+                pressedOnce2 = true;
+            }
             else
+            {
                 myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
+                drawable.reverseTransition(400);
+                pressedOnce2 = false;
+
+            }
         }
 
         //click listeners to change Database value of rgb led switches

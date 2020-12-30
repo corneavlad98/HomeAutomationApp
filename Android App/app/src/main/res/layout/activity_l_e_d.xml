@@ -6,6 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageButton
+        android:id="@+id/normalLed2"
+        android:layout_width="182dp"
+        android:layout_height="146dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:adjustViewBounds="true"
+        android:background="?android:selectableItemBackground"
+        android:scaleType="centerInside"
+        android:src="@drawable/normal_led"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.711" />
+
+    <ImageButton
+        android:id="@+id/normalLed1"
+        android:layout_width="182dp"
+        android:layout_height="146dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:adjustViewBounds="true"
+        android:background="?android:selectableItemBackground"
+        android:scaleType="centerInside"
+        android:src="@drawable/normal_led"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.711" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarLED"
         android:layout_width="415dp"
@@ -43,34 +77,6 @@
         app:layout_constraintTop_toTopOf="@+id/toolbarLED" />
 
     <Switch
-        android:id="@+id/ledSwitch1"
-        android:layout_width="105dp"
-        android:layout_height="51dp"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:text="LED 1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbarLED"
-        app:layout_constraintVertical_bias="0.585"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    <Switch
-        android:id="@+id/ledSwitch2"
-        android:layout_width="105dp"
-        android:layout_height="51dp"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:text="LED 2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    <Switch
         android:id="@+id/redSwitch"
         android:layout_width="74dp"
         android:layout_height="48dp"
@@ -80,10 +86,10 @@
         android:textColor="#CF1212"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbarLED"
-        app:layout_constraintVertical_bias="0.332"
+        app:layout_constraintVertical_bias="0.163"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
@@ -96,10 +102,10 @@
         android:textColor="#30CC36"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbarLED"
-        app:layout_constraintVertical_bias="0.332"
+        app:layout_constraintVertical_bias="0.162"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
@@ -112,10 +118,38 @@
         android:textColor="#215CF3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbarLED"
-        app:layout_constraintVertical_bias="0.332"
+        app:layout_constraintVertical_bias="0.162"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/normalLedText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Normal LED 1"
+        android:textColor="#020000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.832" />
+
+    <TextView
+        android:id="@+id/normalLedText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Normal LED 2"
+        android:textColor="#020000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.832" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

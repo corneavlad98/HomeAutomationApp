@@ -16,28 +16,33 @@
         android:theme="@style/MainWindowTheme"
         tools:ignore="ExtraText"
         tools:replace="android:label">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".TemperatureActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/OtherWindowsTheme" />
         <activity
             android:name=".LEDActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/OtherWindowsTheme" />
         <activity
             android:name=".ZWaveActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/OtherWindowsTheme" />
         <activity
             android:name=".CameraActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/OtherWindowsTheme" />
         <activity
             android:name=".CameraSettingsActivity"
-            android:theme="@style/OtherWindowsTheme"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/OtherWindowsTheme" />
     </application>
-
 </manifest>
