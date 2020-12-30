@@ -1,11 +1,15 @@
 package com.example.androidapp
 
 import android.graphics.drawable.TransitionDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.view.Gravity
+import android.view.View
 import android.widget.*
-
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.FirebaseDatabase
+
 
 class LEDActivity : AppCompatActivity(){
     var database = FirebaseDatabase.getInstance()
@@ -31,39 +35,95 @@ class LEDActivity : AppCompatActivity(){
         val rgbLedBlueSwitch = findViewById<Switch>(R.id.blueSwitch)
 
         var pressedOnce1 = false;
+        val handler = Handler();
+
         //click listeners to change Database value of normal led switches
         ledImageButton1.setOnClickListener(){
+            //make an Alert Dialog that prompts the user to "wait" 3 seconds in order to compensate for the required time the RPI takes to get the request
+            val alert = waitAlertDialogCreate("Wait for it...");
             val drawable = ledImageButton1.drawable as TransitionDrawable
+
             if(!pressedOnce1)
             {
                 myDbReference.child("RaspberryPi/LED/LED1").setValue(1)
-                drawable.startTransition(400);
+                val led1Runnable = Runnable {
+                    run()
+                    {
+                        if(alert.isShowing){
+                            alert.dismiss();
+                            drawable.startTransition(400);
+                        }
+                    }
+                }
+                alert.setOnDismissListener(){
+                    handler.removeCallbacks(led1Runnable);
+                }
+                handler.postDelayed(led1Runnable, 3000);
                 pressedOnce1 = true;
             }
             else
             {
                 myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
-                drawable.reverseTransition(400);
+                val openR = Runnable {
+                    run()
+                    {
+                        if(alert.isShowing){
+                            alert.dismiss();
+                            drawable.reverseTransition(400);
+                        }
+                    }
+                }
+                alert.setOnDismissListener(){
+                    handler.removeCallbacks(openR);
+                }
+                handler.postDelayed(openR, 3000);
                 pressedOnce1 = false;
             }
         }
+
         var pressedOnce2 = false;
         ledImageButton2.setOnClickListener(){
+            val alert = waitAlertDialogCreate("Wait for it...");
             val drawable = ledImageButton2.drawable as TransitionDrawable
             if(!pressedOnce2)
             {
                 myDbReference.child("RaspberryPi/LED/LED2").setValue(1)
-                drawable.startTransition(400);
+                val led2Runnable = Runnable {
+                    run()
+                    {
+                        if(alert.isShowing){
+                            alert.dismiss();
+                            drawable.startTransition(400);
+                        }
+                    }
+                }
+                alert.setOnDismissListener(){
+                    handler.removeCallbacks(led2Runnable);
+                }
+                handler.postDelayed(led2Runnable, 3000);
                 pressedOnce2 = true;
             }
             else
             {
                 myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
-                drawable.reverseTransition(400);
+                val led2Runnable = Runnable {
+                    run()
+                    {
+                        if(alert.isShowing){
+                            alert.dismiss();
+                            drawable.reverseTransition(400);
+                        }
+                    }
+                }
+                alert.setOnDismissListener(){
+                    handler.removeCallbacks(led2Runnable);
+                }
+                handler.postDelayed(led2Runnable, 3000);
                 pressedOnce2 = false;
-
             }
         }
+
+
 
         //click listeners to change Database value of rgb led switches
         rgbLedRedSwitch.setOnClickListener(){
@@ -91,5 +151,15 @@ class LEDActivity : AppCompatActivity(){
         }
     }
 
-
+    private fun waitAlertDialogCreate(message: String): AlertDialog {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(message)
+        val dialog = builder.show()
+        val messageText = dialog.findViewById<View>(android.R.id.message) as TextView?
+        messageText!!.gravity = Gravity.CENTER
+        messageText.textSize = 20F
+        dialog.show()
+        dialog.window?.setLayout(580,270)
+        return dialog;
+    }
 }
