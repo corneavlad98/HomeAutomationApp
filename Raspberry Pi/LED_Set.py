@@ -14,11 +14,14 @@ greenPin = 19
 bluePin  = 26
 
 #global led values
-led1Value = 0;
-led2Value = 0;
-redValue = 0;
-greenValue = 0;
-blueValue = 0;
+led1Value = 0
+led2Value = 0
+redValue = 0
+greenValue = 0
+blueValue = 0
+
+#thread stop flag
+threadStop = False
 
 #setup leds
 GPIO.setmode(GPIO.BCM)
@@ -58,30 +61,36 @@ def ledHandle(value, pin):
 
 def getValuesFromDb():
     global led1Value, led2Value, redValue, greenValue, blueValue
+    if(threadStop is False):
+        led1Value = firebase.get(LED_url + '/LED1', '')
+        led2Value = firebase.get(LED_url + '/LED2', '')
 
-    led1Value = firebase.get(LED_url + '/LED1', '')
-    led2Value = firebase.get(LED_url + '/LED2', '')
-
-    redValue = firebase.get(rgbLED_url + '/Red', '')
-    greenValue = firebase.get(rgbLED_url + '/Green', '')
-    blueValue = firebase.get(rgbLED_url + '/Blue', '')
+        redValue = firebase.get(rgbLED_url + '/Red', '')
+        greenValue = firebase.get(rgbLED_url + '/Green', '')
+        blueValue = firebase.get(rgbLED_url + '/Blue', '')
+    else:
+        print("getter thread stopped!")
 
 def handleLedValues():
-    ledHandle(led1Value, led1Pin)
-    ledHandle(led2Value, led2Pin)
-    ledHandle(redValue, redPin)
-    ledHandle(greenValue, greenPin)
-    ledHandle(blueValue, bluePin)
-
+    if(threadStop is False):
+        ledHandle(led1Value, led1Pin)
+        ledHandle(led2Value, led2Pin)
+        ledHandle(redValue, redPin)
+        ledHandle(greenValue, greenPin)
+        ledHandle(blueValue, bluePin)
+    else:
+        print("handler thread stopped!")
 
 try:
     while(True):    
         t1 = threading.Thread(target = getValuesFromDb)
         t2 = threading.Thread(target = handleLedValues)
-        t1.start()
-        t2.start()
+        t1.start()     
+        t2.start()      
         print("LED1: " + str(led1Value) + " LED2: " + str(led2Value) + " R: " + str(redValue) + " G: " + str(greenValue) + " B: " + str(blueValue))       
 except KeyboardInterrupt:
+    global threadStop
+    threadStop = True
     print("exited program!")
     GPIO.output(led1Pin,GPIO.LOW)
     GPIO.output(led2Pin,GPIO.LOW)
