@@ -40,85 +40,89 @@ class LEDActivity : AppCompatActivity(){
         //click listeners to change Database value of normal led switches
         ledImageButton1.setOnClickListener(){
             //make an Alert Dialog that prompts the user to "wait" 3 seconds in order to compensate for the required time the RPI takes to get the request
-            val alert = waitAlertDialogCreate("Wait for it...");
+//            val alert = waitAlertDialogCreate("Wait for it...");
             val drawable = ledImageButton1.drawable as TransitionDrawable
 
             if(!pressedOnce1)
             {
                 myDbReference.child("RaspberryPi/LED/LED1").setValue(1)
-                val led1Runnable = Runnable {
-                    run()
-                    {
-                        if(alert.isShowing){
-                            alert.dismiss();
-                            drawable.startTransition(400);
-                        }
-                    }
-                }
-                alert.setOnDismissListener(){
-                    handler.removeCallbacks(led1Runnable);
-                }
-                handler.postDelayed(led1Runnable, 3500);
+                drawable.startTransition(400);
+//                val led1Runnable = Runnable {
+//                    run()
+//                    {
+//                        if(alert.isShowing){
+//                            alert.dismiss();
+//                            drawable.startTransition(400);
+//                        }
+//                    }
+//                }
+//                alert.setOnDismissListener(){
+//                    handler.removeCallbacks(led1Runnable);
+//                }
+//                handler.postDelayed(led1Runnable, 1500);
                 pressedOnce1 = true;
             }
             else
             {
                 myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
-                val openR = Runnable {
-                    run()
-                    {
-                        if(alert.isShowing){
-                            alert.dismiss();
-                            drawable.reverseTransition(400);
-                        }
-                    }
-                }
-                alert.setOnDismissListener(){
-                    handler.removeCallbacks(openR);
-                }
-                handler.postDelayed(openR, 3500);
+                drawable.reverseTransition(400);
+//                val openR = Runnable {
+//                    run()
+//                    {
+//                        if(alert.isShowing){
+//                            alert.dismiss();
+//                            drawable.reverseTransition(400);
+//                        }
+//                    }
+//                }
+//                alert.setOnDismissListener(){
+//                    handler.removeCallbacks(openR);
+//                }
+//                handler.postDelayed(openR, 1500);
                 pressedOnce1 = false;
             }
         }
 
         var pressedOnce2 = false;
         ledImageButton2.setOnClickListener(){
-            val alert = waitAlertDialogCreate("Wait for it...");
+//            val alert = waitAlertDialogCreate("Wait for it...");
             val drawable = ledImageButton2.drawable as TransitionDrawable
             if(!pressedOnce2)
             {
                 myDbReference.child("RaspberryPi/LED/LED2").setValue(1)
-                val led2Runnable = Runnable {
-                    run()
-                    {
-                        if(alert.isShowing){
-                            alert.dismiss();
-                            drawable.startTransition(400);
-                        }
-                    }
-                }
-                alert.setOnDismissListener(){
-                    handler.removeCallbacks(led2Runnable);
-                }
-                handler.postDelayed(led2Runnable, 3500);
+                drawable.startTransition(400);
+//                val led2Runnable = Runnable {
+//                    run()
+//                    {
+//                        if(alert.isShowing){
+//                            alert.dismiss();
+//                            drawable.startTransition(400);
+//                        }
+//                    }
+//                }
+//                alert.setOnDismissListener(){
+//                    handler.removeCallbacks(led2Runnable);
+//                }
+//                handler.postDelayed(led2Runnable, 1500);
                 pressedOnce2 = true;
             }
             else
             {
                 myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
-                val led2Runnable = Runnable {
-                    run()
-                    {
-                        if(alert.isShowing){
-                            alert.dismiss();
-                            drawable.reverseTransition(400);
-                        }
-                    }
-                }
-                alert.setOnDismissListener(){
-                    handler.removeCallbacks(led2Runnable);
-                }
-                handler.postDelayed(led2Runnable, 3500);
+                drawable.reverseTransition(400);
+//                val led2Runnable = Runnable {
+//                    run()
+//                    {
+//                        if(alert.isShowing){
+//                            alert.dismiss();
+//                            drawable.reverseTransition(400);
+//                        }
+//                    }
+//                }
+//                alert.setOnDismissListener(){
+//                    handler.removeCallbacks(led2Runnable);
+//                }
+//                handler.postDelayed(led2Runnable, 1500);
                 pressedOnce2 = false;
             }
         }
