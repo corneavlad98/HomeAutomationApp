@@ -58,7 +58,7 @@ class LEDActivity : AppCompatActivity(){
                 alert.setOnDismissListener(){
                     handler.removeCallbacks(led1Runnable);
                 }
-                handler.postDelayed(led1Runnable, 3000);
+                handler.postDelayed(led1Runnable, 3500);
                 pressedOnce1 = true;
             }
             else
@@ -76,7 +76,7 @@ class LEDActivity : AppCompatActivity(){
                 alert.setOnDismissListener(){
                     handler.removeCallbacks(openR);
                 }
-                handler.postDelayed(openR, 3000);
+                handler.postDelayed(openR, 3500);
                 pressedOnce1 = false;
             }
         }
@@ -100,7 +100,7 @@ class LEDActivity : AppCompatActivity(){
                 alert.setOnDismissListener(){
                     handler.removeCallbacks(led2Runnable);
                 }
-                handler.postDelayed(led2Runnable, 3000);
+                handler.postDelayed(led2Runnable, 3500);
                 pressedOnce2 = true;
             }
             else
@@ -118,7 +118,7 @@ class LEDActivity : AppCompatActivity(){
                 alert.setOnDismissListener(){
                     handler.removeCallbacks(led2Runnable);
                 }
-                handler.postDelayed(led2Runnable, 3000);
+                handler.postDelayed(led2Runnable, 3500);
                 pressedOnce2 = false;
             }
         }

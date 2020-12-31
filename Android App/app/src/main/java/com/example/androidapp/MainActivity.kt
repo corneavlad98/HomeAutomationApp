@@ -61,6 +61,9 @@ class MainActivity : AppCompatActivity() {
         //reset LEDs when pressing backbutton from MainActivity
         myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
         myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
     }
     override fun onDestroy() {
         super.onDestroy()
