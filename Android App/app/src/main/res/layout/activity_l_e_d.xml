@@ -6,10 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/discoButton"
+        android:layout_width="46dp"
+        android:layout_height="41dp"
+        android:background="@drawable/rainbow_rounded"
+        android:text="disco"
+        android:textColor="#FFFDFD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.381" />
+
     <ImageButton
-        android:id="@+id/normalLed2"
-        android:layout_width="182dp"
-        android:layout_height="146dp"
+        android:id="@+id/rgbLed"
+        android:layout_width="163dp"
+        android:layout_height="136dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:adjustViewBounds="true"
@@ -18,15 +32,15 @@
         android:src="@drawable/normal_led"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.711" />
+        app:layout_constraintVertical_bias="0.359" />
 
     <ImageButton
         android:id="@+id/normalLed1"
-        android:layout_width="182dp"
-        android:layout_height="146dp"
+        android:layout_width="163dp"
+        android:layout_height="136dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:adjustViewBounds="true"
@@ -35,10 +49,27 @@
         android:src="@drawable/normal_led"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.711" />
+        app:layout_constraintVertical_bias="0.715" />
+
+    <ImageButton
+        android:id="@+id/normalLed2"
+        android:layout_width="163dp"
+        android:layout_height="136dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:adjustViewBounds="true"
+        android:background="?android:selectableItemBackground"
+        android:scaleType="centerInside"
+        android:src="@drawable/normal_led"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.715" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarLED"
@@ -76,54 +107,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbarLED" />
 
-    <Switch
-        android:id="@+id/redSwitch"
-        android:layout_width="74dp"
-        android:layout_height="48dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Red"
-        android:textColor="#CF1212"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbarLED"
-        app:layout_constraintVertical_bias="0.163"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    <Switch
-        android:id="@+id/greenSwitch"
-        android:layout_width="88dp"
-        android:layout_height="48dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Green"
-        android:textColor="#30CC36"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbarLED"
-        app:layout_constraintVertical_bias="0.162"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    <Switch
-        android:id="@+id/blueSwitch"
-        android:layout_width="77dp"
-        android:layout_height="48dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:text="Blue"
-        android:textColor="#215CF3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbarLED"
-        app:layout_constraintVertical_bias="0.162"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
     <TextView
         android:id="@+id/normalLedText1"
         android:layout_width="wrap_content"
@@ -147,9 +130,106 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintHorizontal_bias="0.822"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.832" />
+
+    <Button
+        android:id="@+id/magentaButton"
+        android:layout_width="46dp"
+        android:layout_height="41dp"
+        android:background="@drawable/magenta_rounded"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.813"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <Button
+        android:id="@+id/offButton"
+        android:layout_width="46dp"
+        android:layout_height="41dp"
+        android:background="@drawable/white_rounded"
+        android:text="Off"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.813"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.217" />
+
+    <Button
+        android:id="@+id/greenButton"
+        android:layout_width="46dp"
+        android:layout_height="41dp"
+        android:background="@drawable/green_rounded"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.389"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <Button
+        android:id="@+id/yellowButton"
+        android:layout_width="46dp"
+        android:layout_height="41dp"
+        android:background="@drawable/yellow_rounded"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.389"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.217" />
+
+    <Button
+        android:id="@+id/redButton"
+        android:layout_width="46dp"
+        android:layout_height="41dp"
+        android:background="@drawable/red_rounded"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.189"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <Button
+        android:id="@+id/cyanButton"
+        android:layout_width="46dp"
+        android:layout_height="41dp"
+        android:background="@drawable/cyan_rounded"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.189"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.217" />
+
+    <Button
+        android:id="@+id/blueButton"
+        android:layout_width="46dp"
+        android:layout_height="41dp"
+        android:background="@drawable/blue_rounded"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <Button
+        android:id="@+id/whiteButton"
+        android:layout_width="46dp"
+        android:layout_height="41dp"
+        android:background="@drawable/white_rounded"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.217" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
