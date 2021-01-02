@@ -19,6 +19,7 @@ led2Value = 0
 redValue = 0
 greenValue = 0
 blueValue = 0
+discoValue = 0
 
 #thread stop flag
 threadStop = False
@@ -58,29 +59,75 @@ def ledHandle(value, pin):
         turnOn(pin)
     elif(value == 0):
         turnOff(pin)
-
 def getValuesFromDb():
-    global led1Value, led2Value, redValue, greenValue, blueValue
+    global led1Value, led2Value, redValue, greenValue, blueValue, discoValue
     while(threadStop is False):
         led1Value = firebase.get(LED_url + '/LED1', '')
         led2Value = firebase.get(LED_url + '/LED2', '')
         redValue = firebase.get(rgbLED_url + '/Red', '')
         greenValue = firebase.get(rgbLED_url + '/Green', '')
         blueValue = firebase.get(rgbLED_url + '/Blue', '')
+        discoValue = firebase.get(rgbLED_url + '/Disco', '')
 
-        print("LED1: " + str(led1Value) + " LED2: " + str(led2Value) + " R: " + str(redValue) + " G: " + str(greenValue) + " B: " + str(blueValue))       
+        print("LED1: " + str(led1Value) + " LED2: " + str(led2Value) + " R: " + str(redValue) + " G: " + str(greenValue) + " B: " + str(blueValue) + " Disco: " + str(discoValue))       
     print("getter thread stopped!")
 
 def handleLedValues():
     while(threadStop is False):
-        ledHandle(led1Value, led1Pin)
-        ledHandle(led2Value, led2Pin)
-        ledHandle(redValue, redPin)
-        ledHandle(greenValue, greenPin)
-        ledHandle(blueValue, bluePin)    
+        if(discoValue == 0):
+            ledHandle(led1Value, led1Pin)
+            ledHandle(led2Value, led2Pin)
+            ledHandle(redValue, redPin)
+            ledHandle(greenValue, greenPin)
+            ledHandle(blueValue, bluePin)    
+        elif(discoValue == 1):
+            discoMode()
        
     print("handler thread stopped!")
 
+def discoMode():
+    #turn red on
+    turnOn(redPin)
+    turnOff(greenPin)
+    turnOff(bluePin)
+    time.sleep(0.5)
+
+    #turn green on
+    turnOff(redPin)
+    turnOn(greenPin)
+    turnOff(bluePin)
+    time.sleep(0.5)
+
+    #turn blue on
+    turnOff(redPin)
+    turnOff(greenPin)
+    turnOn(bluePin)
+    time.sleep(0.5)
+
+    #turn magenta on
+    turnOn(redPin)
+    turnOff(greenPin)
+    turnOn(bluePin)
+    time.sleep(0.5)
+
+    #turn cyan on
+    turnOff(redPin)
+    turnOn(greenPin)
+    turnOn(bluePin)
+    time.sleep(0.5)
+
+    #turn yellow on
+    turnOn(redPin)
+    turnOn(greenPin)
+    turnOff(bluePin)
+    time.sleep(0.5)
+
+    #turn white on
+    turnOn(redPin)
+    turnOn(greenPin)
+    turnOn(bluePin)
+    time.sleep(0.5)
+    
 try:
     t1 = threading.Thread(target = getValuesFromDb)
     t2 = threading.Thread(target = handleLedValues)
