@@ -54,40 +54,42 @@ def turnOff(pin):
         GPIO.output(pin,GPIO.HIGH)
 
 def ledHandle(value, pin):
-    if(value == 1):
+    if(value == 1):       
         turnOn(pin)
     elif(value == 0):
         turnOff(pin)
 
 def getValuesFromDb():
     global led1Value, led2Value, redValue, greenValue, blueValue
-    if(threadStop is False):
+    while(threadStop is False):
         led1Value = firebase.get(LED_url + '/LED1', '')
         led2Value = firebase.get(LED_url + '/LED2', '')
-
         redValue = firebase.get(rgbLED_url + '/Red', '')
         greenValue = firebase.get(rgbLED_url + '/Green', '')
         blueValue = firebase.get(rgbLED_url + '/Blue', '')
-    else:
-        print("getter thread stopped!")
+
+        print("LED1: " + str(led1Value) + " LED2: " + str(led2Value) + " R: " + str(redValue) + " G: " + str(greenValue) + " B: " + str(blueValue))       
+    print("getter thread stopped!")
 
 def handleLedValues():
-    if(threadStop is False):
+    while(threadStop is False):
         ledHandle(led1Value, led1Pin)
         ledHandle(led2Value, led2Pin)
         ledHandle(redValue, redPin)
         ledHandle(greenValue, greenPin)
-        ledHandle(blueValue, bluePin)
-    else:
-        print("handler thread stopped!")
+        ledHandle(blueValue, bluePin)    
+       
+    print("handler thread stopped!")
 
 try:
-    while(True):    
-        t1 = threading.Thread(target = getValuesFromDb)
-        t2 = threading.Thread(target = handleLedValues)
-        t1.start()     
-        t2.start()      
-        print("LED1: " + str(led1Value) + " LED2: " + str(led2Value) + " R: " + str(redValue) + " G: " + str(greenValue) + " B: " + str(blueValue))       
+    t1 = threading.Thread(target = getValuesFromDb)
+    t2 = threading.Thread(target = handleLedValues)
+    t1.start()     
+    t2.start()       
+    print("started: " + t1.getName())
+    print("started: " + t2.getName())
+
+    print("program is running...")
 except KeyboardInterrupt:
     global threadStop
     threadStop = True
