@@ -42,23 +42,111 @@ GPIO.output(redPin,GPIO.HIGH)
 GPIO.output(greenPin,GPIO.HIGH)
 GPIO.output(bluePin,GPIO.HIGH)
 
-def turnOn(pin):
-    if(pin == led1Pin or pin == led2Pin):
+def resetRGBValues():
+    firebase.put(rgbLED_url, 'StartRed', 0)
+    firebase.put(rgbLED_url, 'StartGreen', 0)
+    firebase.put(rgbLED_url, 'StartBlue', 0)
+
+def turnOn(pin):   
+    if(pin == led1Pin):
+        if(discoValue == 0):
+            firebase.put(LED_url, 'StartNormal1', 1)  
+        time.sleep(0.1)   
         GPIO.output(pin,GPIO.HIGH)
-    if(pin == redPin or pin == greenPin or pin == bluePin):
+    if(pin == led2Pin):
+        if(discoValue == 0):
+            firebase.put(LED_url, 'StartNormal2', 1)
+        time.sleep(0.1)       
+        GPIO.output(pin,GPIO.HIGH)
+
+    if(pin == redPin):
+        if(discoValue == 0):
+            firebase.put(rgbLED_url, 'StartRed', 1)
+        GPIO.output(pin,GPIO.LOW)
+    if(pin == greenPin):
+        if(discoValue == 0):
+            firebase.put(rgbLED_url, 'StartGreen', 1)
+        GPIO.output(pin,GPIO.LOW)
+    if(pin == bluePin):
+        if(discoValue == 0):
+            firebase.put(rgbLED_url, 'StartBlue', 1)
+        GPIO.output(pin,GPIO.LOW)
+        
+        
+def turnOff(pin):
+    if(pin == led1Pin):
+        if(discoValue == 0):
+            firebase.put(LED_url, 'StartNormal1', 0) 
+        time.sleep(0.1)     
+        GPIO.output(pin,GPIO.LOW)
+    if(pin == led2Pin):
+        if(discoValue == 0):
+            firebase.put(LED_url, 'StartNormal2', 0)
+        time.sleep(0.1)      
         GPIO.output(pin,GPIO.LOW)
 
-def turnOff(pin):
-    if(pin == led1Pin or pin == led2Pin):
-        GPIO.output(pin,GPIO.LOW)
-    if(pin == redPin or pin == greenPin or pin == bluePin):
+    if(pin == redPin):
+        if(discoValue == 0):
+            firebase.put(rgbLED_url, 'StartRed', 0)
+        GPIO.output(pin,GPIO.HIGH)
+    if(pin == greenPin):
+        if(discoValue == 0):
+            firebase.put(rgbLED_url, 'StartGreen', 0)
+        GPIO.output(pin,GPIO.HIGH)
+    if(pin == bluePin):
+        if(discoValue == 0):
+            firebase.put(rgbLED_url, 'StartBlue', 0)
         GPIO.output(pin,GPIO.HIGH)
 
 def ledHandle(value, pin):
-    if(value == 1):       
-        turnOn(pin)
-    elif(value == 0):
+    if(value == 1):      
+        turnOn(pin)       
+    elif(value == 0):        
         turnOff(pin)
+
+def rgbHandle(red, green, blue):
+    #Red
+    if(red == 1 and green == 0 and blue == 0):
+        turnOn(redPin)
+        turnOff(greenPin)
+        turnOff(bluePin)
+    #Green
+    if(red == 0 and green == 1 and blue == 0):
+        turnOff(redPin)
+        turnOn(greenPin)
+        turnOff(bluePin)
+    #Blue
+    if(red == 0 and green == 0 and blue == 1):
+        turnOff(redPin)
+        turnOff(greenPin)
+        turnOn(bluePin)
+    #Magenta
+    if(red == 1 and green == 0 and blue == 1):
+        turnOn(redPin)
+        turnOff(greenPin)
+        turnOn(bluePin)
+    #Cyan
+    if(red == 0 and green == 1 and blue == 1):
+        turnOff(redPin)
+        turnOn(greenPin)
+        turnOn(bluePin)
+    #Yellow
+    if(red == 1 and green == 1 and blue == 0):
+        turnOn(redPin)
+        turnOn(greenPin)
+        turnOff(bluePin)
+    #White
+    if(red == 1 and green == 1 and blue == 1):
+        turnOn(redPin)
+        turnOn(greenPin)
+        turnOn(bluePin)
+    #Off
+    if(red == 0 and green == 0 and blue == 0):
+        turnOff(redPin)
+        turnOff(greenPin)
+        turnOff(bluePin)
+       
+
 def getValuesFromDb():
     global led1Value, led2Value, redValue, greenValue, blueValue, discoValue
     while(threadStop is False):
@@ -72,17 +160,26 @@ def getValuesFromDb():
         print("LED1: " + str(led1Value) + " LED2: " + str(led2Value) + " R: " + str(redValue) + " G: " + str(greenValue) + " B: " + str(blueValue) + " Disco: " + str(discoValue))       
     print("getter thread stopped!")
 
-def handleLedValues():
+def handleLedValues():   
     while(threadStop is False):
-        if(discoValue == 0):
+        discoVal = firebase.get(rgbLED_url + '/Disco', '')
+        if(discoVal == 0):
             ledHandle(led1Value, led1Pin)
-            ledHandle(led2Value, led2Pin)
-            ledHandle(redValue, redPin)
-            ledHandle(greenValue, greenPin)
-            ledHandle(blueValue, bluePin)    
-        elif(discoValue == 1):
-            discoMode()
-       
+            ledHandle(led2Value, led2Pin)       
+            rgbHandle(redValue, greenValue, blueValue)
+        elif(discoVal == 1):
+            count = 1
+            resetRGBValues()
+            firebase.put(rgbLED_url, 'StartLed', 1)
+            time.sleep(0.6)
+            while(count <= 3):           
+                discoMode()
+                count += 1
+            firebase.put(rgbLED_url, 'StartLed', 0) 
+            firebase.put(rgbLED_url, 'Disco', 0)
+               
+            
+               
     print("handler thread stopped!")
 
 def discoMode():
