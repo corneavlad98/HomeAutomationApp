@@ -70,8 +70,18 @@ class MainActivity : AppCompatActivity() {
         //reset LEDs when destroying (closing) MainActivity
         myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
         myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
+
+        myDbReference.child("RaspberryPi/LED/StartNormal1").setValue(0)
+        myDbReference.child("RaspberryPi/LED/StartNormal2").setValue(0)
+
         myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
         myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
         myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
+
+        myDbReference.child("RaspberryPi/LED/rgbLED/StartRed").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/StartGreen").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/StartBlue").setValue(0)
+        myDbReference.child("RaspberryPi/LED/rgbLED/StartLed").setValue(0)
     }
 }

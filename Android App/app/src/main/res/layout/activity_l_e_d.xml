@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/rgbLedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RGB LED"
+        android:textColor="#020000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.525" />
+
     <Button
         android:id="@+id/discoButton"
         android:layout_width="46dp"
@@ -20,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.381" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/rgbLed"
         android:layout_width="163dp"
         android:layout_height="136dp"
@@ -29,7 +42,7 @@
         android:adjustViewBounds="true"
         android:background="?android:selectableItemBackground"
         android:scaleType="centerInside"
-        android:src="@drawable/normal_led"
+        android:src="@drawable/normal_led_off"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
@@ -46,7 +59,7 @@
         android:adjustViewBounds="true"
         android:background="?android:selectableItemBackground"
         android:scaleType="centerInside"
-        android:src="@drawable/normal_led"
+        android:src="@drawable/normal_led_off"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.105"
@@ -63,7 +76,7 @@
         android:adjustViewBounds="true"
         android:background="?android:selectableItemBackground"
         android:scaleType="centerInside"
-        android:src="@drawable/normal_led"
+        android:src="@drawable/normal_led_off"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.92"
