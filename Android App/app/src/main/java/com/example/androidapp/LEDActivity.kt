@@ -1,6 +1,5 @@
 package com.example.androidapp
 
-import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Button
@@ -18,32 +17,18 @@ class LEDActivity : AppCompatActivity(){
     var database = FirebaseDatabase.getInstance()
     var myDbReference = database.getReference()
     private fun resetValues(){
-        myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
-        myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
+        setNormalLedValuesInDatabase(led = 1, value = 0)
+        setNormalLedValuesInDatabase(led = 2, value = 0)
 
-        myDbReference.child("RaspberryPi/LED/StartNormal1").setValue(0)
-        myDbReference.child("RaspberryPi/LED/StartNormal2").setValue(0)
+        setNormalLedStartInDatabase(led = 1, value = 0)
+        setNormalLedStartInDatabase(led = 2, value = 0)
 
-        myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
-
-        myDbReference.child("RaspberryPi/LED/rgbLED/StartRed").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/StartGreen").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/StartBlue").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/StartLed").setValue(0)
+        setRgbLedValuesInDatabase(red = false, green = false , blue = false ,disco = false)
+        setRgbLedStartInDatabase(red = false, green = false , blue = false ,disco = false)
     }
     private fun resetRGBValues(){
-        myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
-
-        myDbReference.child("RaspberryPi/LED/rgbLED/StartRed").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/StartGreen").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/StartBlue").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/StartLed").setValue(0)
+        setRgbLedValuesInDatabase(red = false, green = false , blue = false ,disco = false)
+        setRgbLedStartInDatabase(red = false, green = false , blue = false ,disco = false)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,55 +55,29 @@ class LEDActivity : AppCompatActivity(){
         val offButton = findViewById<Button>(R.id.offButton)
         val discoButton = findViewById<Button>(R.id.discoButton)
 
-        var pressedOnce1 = false;
+        val led1ValuePath = "RaspberryPi/LED/LED1"
+        val led1StartPath = "RaspberryPi/LED/StartNormal1"
+        val led2ValuePath = "RaspberryPi/LED/LED2"
+        val led2StartPath = "RaspberryPi/LED/StartNormal2"
+
+        val startRedPath = "RaspberryPi/LED/rgbLED/StartRed"
+        val startGreenPath = "RaspberryPi/LED/rgbLED/StartGreen"
+        val startBluePath = "RaspberryPi/LED/rgbLED/StartBlue"
 
         //click listeners to change Database value of normal led switches
+        var pressedOnce1 = false;
         ledImageButton1.setOnClickListener(){
             if(!pressedOnce1)
             {
-                myDbReference.child("RaspberryPi/LED/LED1").setValue(1)
-
-                val valueListener = object: ValueEventListener{
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val led1Value = snapshot.child("RaspberryPi/LED/LED1").value
-                        val ledStart = snapshot.child("RaspberryPi/LED/StartNormal1").value
-
-                        if (led1Value != null && ledStart != null)
-                        {
-                            if(led1Value.toString().equals("1") && ledStart.toString().equals("1"))
-                            {
-                                ledImageButton1.setImageResource(R.drawable.normal_led_on)
-                            }
-                        }
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-                }
+                setNormalLedValuesInDatabase(led = 1, value = 1)
+                val valueListener = normalLedPictureHandler(R.id.normalLed1, led1ValuePath, led1StartPath)
                 myDbReference.addValueEventListener(valueListener);
                 pressedOnce1 = true;
             }
             else
             {
-                myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
-
-                val valueListener = object: ValueEventListener{
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val led1Value = snapshot.child("RaspberryPi/LED/LED1").value
-                        val ledStart = snapshot.child("RaspberryPi/LED/StartNormal1").value
-
-                        if (led1Value != null && ledStart != null)
-                        {
-                            if(led1Value.toString().equals("0") && ledStart.toString().equals("0"))
-                            {
-                                ledImageButton1.setImageResource(R.drawable.normal_led_off)
-                            }
-                        }
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-                }
+                setNormalLedValuesInDatabase(led = 1, value = 0)
+                val valueListener = normalLedPictureHandler(R.id.normalLed1, led1ValuePath, led1StartPath)
                 myDbReference.addValueEventListener(valueListener);
                 pressedOnce1 = false;
             }
@@ -128,271 +87,82 @@ class LEDActivity : AppCompatActivity(){
         ledImageButton2.setOnClickListener(){
             if(!pressedOnce2)
             {
-                myDbReference.child("RaspberryPi/LED/LED2").setValue(1)
-
-                val valueListener = object: ValueEventListener{
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val led2Value = snapshot.child("RaspberryPi/LED/LED2").value
-                        val ledStart = snapshot.child("RaspberryPi/LED/StartNormal2").value
-
-                        if (led2Value != null && ledStart != null)
-                        {
-                            if(led2Value.toString().equals("1") && ledStart.toString().equals("1"))
-                            {
-                                ledImageButton2.setImageResource(R.drawable.normal_led_on)
-                            }
-                        }
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-                }
+                setNormalLedValuesInDatabase(led = 2, value = 1)
+                val valueListener = normalLedPictureHandler(R.id.normalLed2, led2ValuePath, led2StartPath)
                 myDbReference.addValueEventListener(valueListener);
                 pressedOnce2 = true;
             }
             else
             {
-                myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
-
-                val valueListener = object: ValueEventListener{
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val led2Value = snapshot.child("RaspberryPi/LED/LED2").value
-                        val ledStart = snapshot.child("RaspberryPi/LED/StartNormal2").value
-
-                        if (led2Value != null && ledStart != null)
-                        {
-                            if(led2Value.toString().equals("0") && ledStart.toString().equals("0"))
-                            {
-                                ledImageButton2.setImageResource(R.drawable.normal_led_off)
-                            }
-                        }
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-                }
+                setNormalLedValuesInDatabase(led = 2, value = 0)
+                val valueListener = normalLedPictureHandler(R.id.normalLed2, led2ValuePath, led2StartPath)
                 myDbReference.addValueEventListener(valueListener);
                 pressedOnce2 = false;
             }
         }
 
-
         //color buttons for the RGB LED
         //RED COLOR
         redButton.setOnClickListener(){
-            resetRGBValues()
-            myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
-            val valueListener = object: ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val redStart = snapshot.child("RaspberryPi/LED/rgbLED/StartRed").value
-                    if (redStart != null)
-                    {
-                        if(redStart.toString().equals("1"))
-                        {
-                            rgbLed.setImageResource(R.drawable.rgb_led_red)
-                        }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            }
+            //resetRGBValues()
+            setRgbLedValuesInDatabase(red = true, green = false, blue = false ,disco = false)
+            val valueListener = rgbLedPictureHandler(startRedPath, startGreenPath, startBluePath)
             myDbReference.addValueEventListener(valueListener);
         }
-
         //GREEN COLOR
         greenButton.setOnClickListener(){
-            resetRGBValues()
-            myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
-
-            val valueListener = object: ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val greenStart = snapshot.child("RaspberryPi/LED/rgbLED/StartGreen").value
-                    if (greenStart != null)
-                    {
-                        if(greenStart.toString().equals("1"))
-                        {
-                            rgbLed.setImageResource(R.drawable.rgb_led_green)
-                        }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            }
+            //resetRGBValues()
+            setRgbLedValuesInDatabase(red = false, green = true, blue = false ,disco = false)
+            val valueListener = rgbLedPictureHandler(startRedPath, startGreenPath, startBluePath)
             myDbReference.addValueEventListener(valueListener);
         }
         //BLUE COLOR
         blueButton.setOnClickListener(){
-            resetRGBValues()
-            myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
-
-            val valueListener = object: ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val blueStart = snapshot.child("RaspberryPi/LED/rgbLED/StartBlue").value
-                    if (blueStart != null)
-                    {
-                        if(blueStart.toString().equals("1"))
-                        {
-                            rgbLed.setImageResource(R.drawable.rgb_led_blue)
-                        }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            }
+            //resetRGBValues()
+            setRgbLedValuesInDatabase(red = false, green = false, blue = true ,disco = false)
+            val valueListener = rgbLedPictureHandler(startRedPath, startGreenPath, startBluePath)
             myDbReference.addValueEventListener(valueListener);
         }
         //MAGENTA COLOR
         magentaButton.setOnClickListener(){
-            resetRGBValues()
-            myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
-
-            val valueListener = object: ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val redStart = snapshot.child("RaspberryPi/LED/rgbLED/StartRed").value
-                    val blueStart = snapshot.child("RaspberryPi/LED/rgbLED/StartBlue").value
-                    if (blueStart != null && redStart != null)
-                    {
-                        if(redStart.toString().equals("1") && blueStart.toString().equals("1"))
-                        {
-                            rgbLed.setImageResource(R.drawable.rgb_led_magenta)
-                        }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            }
+            //resetRGBValues()
+            setRgbLedValuesInDatabase(red = true, green = false, blue = true ,disco = false)
+            val valueListener = rgbLedPictureHandler(startRedPath, startGreenPath, startBluePath)
             myDbReference.addValueEventListener(valueListener);
         }
         //CYAN COLOR
         cyanButton.setOnClickListener(){
-            resetRGBValues()
-            myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
-
-            val valueListener = object: ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val greenStart = snapshot.child("RaspberryPi/LED/rgbLED/StartGreen").value
-                    val blueStart = snapshot.child("RaspberryPi/LED/rgbLED/StartBlue").value
-                    if (blueStart != null && greenStart != null)
-                    {
-                        if(greenStart.toString().equals("1") && blueStart.toString().equals("1"))
-                        {
-                            rgbLed.setImageResource(R.drawable.rgb_led_cyan)
-                        }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            }
+            //resetRGBValues()
+            setRgbLedValuesInDatabase(red = false, green = true, blue = true ,disco = false)
+            val valueListener = rgbLedPictureHandler(startRedPath, startGreenPath, startBluePath)
             myDbReference.addValueEventListener(valueListener);
         }
         //YELLOW COLOR
         yellowButton.setOnClickListener(){
-            resetRGBValues()
-            myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
-
-            val valueListener = object: ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val redStart = snapshot.child("RaspberryPi/LED/rgbLED/StartRed").value
-                    val greenStart = snapshot.child("RaspberryPi/LED/rgbLED/StartGreen").value
-                    if (redStart != null && greenStart != null)
-                    {
-                        if(greenStart.toString().equals("1") && redStart.toString().equals("1"))
-                        {
-                            rgbLed.setImageResource(R.drawable.rgb_led_yellow)
-                        }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            }
+            //resetRGBValues()
+            setRgbLedValuesInDatabase(red = true, green = true, blue = false ,disco = false)
+            val valueListener = rgbLedPictureHandler(startRedPath, startGreenPath, startBluePath)
             myDbReference.addValueEventListener(valueListener);
         }
         //WHITE COLOR
         whiteButton.setOnClickListener(){
-            resetRGBValues()
-            myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(1)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
-
-            val valueListener = object: ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val redStart = snapshot.child("RaspberryPi/LED/rgbLED/StartRed").value
-                    val greenStart = snapshot.child("RaspberryPi/LED/rgbLED/StartGreen").value
-                    val blueStart = snapshot.child("RaspberryPi/LED/rgbLED/StartBlue").value
-                    if (redStart != null && greenStart != null && blueStart != null)
-                    {
-                        if(greenStart.toString().equals("1") && redStart.toString().equals("1") && blueStart.toString().equals("1") )
-                        {
-                            rgbLed.setImageResource(R.drawable.rgb_led_white)
-                        }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            }
+           // resetRGBValues()
+            setRgbLedValuesInDatabase(red = true, green = true, blue = true ,disco = false)
+            val valueListener = rgbLedPictureHandler(startRedPath, startGreenPath, startBluePath)
             myDbReference.addValueEventListener(valueListener);
         }
         //OFF MODE
         offButton.setOnClickListener(){
-            resetRGBValues()
-            myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
-
-            val valueListener = object: ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val redStart = snapshot.child("RaspberryPi/LED/rgbLED/StartRed").value
-                    val greenStart = snapshot.child("RaspberryPi/LED/rgbLED/StartGreen").value
-                    val blueStart = snapshot.child("RaspberryPi/LED/rgbLED/StartBlue").value
-                    if (redStart != null && greenStart != null && blueStart != null)
-                    {
-                        if(greenStart.toString().equals("0") && redStart.toString().equals("0") && blueStart.toString().equals("0"))
-                        {
-                            rgbLed.setImageResource(R.drawable.normal_led_off)
-                        }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            }
+            //resetRGBValues()
+            setRgbLedValuesInDatabase(red = false, green = false, blue = false ,disco = false)
+            val valueListener = rgbLedPictureHandler(startRedPath, startGreenPath, startBluePath)
             myDbReference.addValueEventListener(valueListener);
         }
         //DISCO MODE
         discoButton.setOnClickListener()
         {
             resetRGBValues()
-            myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
-            myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(1)
+            setRgbLedValuesInDatabase(red = false, green = false, blue = false ,disco = true)
 
             val valueListener = object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -417,6 +187,118 @@ class LEDActivity : AppCompatActivity(){
         returnButton.setOnClickListener(){
             finish();
         }
+    }
+    private fun normalLedPictureHandler(ledId: Int, ledValuePath: String, ledStartPath: String): ValueEventListener
+    {
+        val ledImageButton = findViewById<ImageButton>(ledId)
+
+        return object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val ledValue = snapshot.child(ledValuePath).value
+                val ledStart = snapshot.child(ledStartPath).value
+
+                if (ledValue != null && ledStart != null)
+                {
+                    if(ledValue.toString().equals("1") && ledStart.toString().equals("1"))
+                        ledImageButton.setImageResource(R.drawable.normal_led_on)
+
+                    if(ledValue.toString().equals("0") && ledStart.toString().equals("0"))
+                        ledImageButton.setImageResource(R.drawable.normal_led_off)
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        }
+    }
+    private fun rgbLedPictureHandler(redStartPath: String, greenStartPath: String, blueStartPath: String): ValueEventListener
+    {
+        val rgbLed = findViewById<ImageView>(R.id.rgbLed)
+
+        return object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val redStart = snapshot.child(redStartPath).value
+                val greenStart = snapshot.child(greenStartPath).value
+                val blueStart = snapshot.child(blueStartPath).value
+
+                if(redStart != null && greenStart != null && blueStart != null)
+                {
+                    if(redStart.toString().equals("1"))
+                        rgbLed.setImageResource(R.drawable.rgb_led_red)
+                    if(greenStart.toString().equals("1"))
+                        rgbLed.setImageResource(R.drawable.rgb_led_green)
+                    if(blueStart.toString().equals("1"))
+                        rgbLed.setImageResource(R.drawable.rgb_led_blue)
+
+                    if(redStart.toString().equals("1") && blueStart.toString().equals("1"))
+                        rgbLed.setImageResource(R.drawable.rgb_led_magenta)
+                    if(greenStart.toString().equals("1") && blueStart.toString().equals("1"))
+                        rgbLed.setImageResource(R.drawable.rgb_led_cyan)
+                    if(redStart.toString().equals("1") && greenStart.toString().equals("1"))
+                        rgbLed.setImageResource(R.drawable.rgb_led_yellow)
+
+                    if(redStart.toString().equals("1") && greenStart.toString().equals("1") && blueStart.toString().equals("1"))
+                        rgbLed.setImageResource(R.drawable.rgb_led_white)
+                    if(redStart.toString().equals("0") && greenStart.toString().equals("0") && blueStart.toString().equals("0"))
+                        rgbLed.setImageResource(R.drawable.normal_led_off)
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        }
+    }
+    private fun setNormalLedValuesInDatabase(led: Int, value: Int)
+    {
+        if(led == 1)
+            myDbReference.child("RaspberryPi/LED/LED1").setValue(value)
+        else if(led == 2)
+            myDbReference.child("RaspberryPi/LED/LED2").setValue(value)
+    }
+    private fun setNormalLedStartInDatabase(led: Int, value: Int)
+    {
+        if(led == 1)
+            myDbReference.child("RaspberryPi/LED/StartNormal1").setValue(value)
+        else if(led == 2)
+            myDbReference.child("RaspberryPi/LED/StartNormal2").setValue(value)
+    }
+    private fun setRgbLedValuesInDatabase(red: Boolean, green: Boolean, blue: Boolean, disco: Boolean)
+    {
+        if(red)
+            myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(1)
+        else
+            myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
+        if(green)
+            myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(1)
+        else
+            myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
+        if(blue)
+            myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(1)
+        else
+            myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
+        if(disco)
+            myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(1)
+        else
+            myDbReference.child("RaspberryPi/LED/rgbLED/Disco").setValue(0)
+    }
+    private fun setRgbLedStartInDatabase(red: Boolean, green: Boolean, blue: Boolean, disco: Boolean)
+    {
+        if(red)
+            myDbReference.child("RaspberryPi/LED/rgbLED/StartRed").setValue(1)
+        else
+            myDbReference.child("RaspberryPi/LED/rgbLED/StartRed").setValue(0)
+        if(green)
+            myDbReference.child("RaspberryPi/LED/rgbLED/StartGreen").setValue(1)
+        else
+            myDbReference.child("RaspberryPi/LED/rgbLED/StartGreen").setValue(0)
+        if(blue)
+            myDbReference.child("RaspberryPi/LED/rgbLED/StartBlue").setValue(1)
+        else
+            myDbReference.child("RaspberryPi/LED/rgbLED/StartBlue").setValue(0)
+        if(disco)
+            myDbReference.child("RaspberryPi/LED/rgbLED/StartLed").setValue(1)
+        else
+            myDbReference.child("RaspberryPi/LED/rgbLED/StartLed").setValue(0)
     }
     private fun discoSet()
     {
