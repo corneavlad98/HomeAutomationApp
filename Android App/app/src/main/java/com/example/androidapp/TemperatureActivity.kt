@@ -33,7 +33,7 @@ class TemperatureActivity : AppCompatActivity() {
                 val temperature = snapshot.child("RaspberryPi/DHT11/Temperature/Value*C").getValue();
 
                 if( humidity != null) {
-                    val humidityText = "Humidity: $humidity % ";
+                    val humidityText = "$humidity%";
                     humidityTextView.setText(humidityText);
                 }
                 else {
@@ -42,8 +42,7 @@ class TemperatureActivity : AppCompatActivity() {
                 }
 
                 if( temperature != null) {
-                    val temperatureText = "Temperature: $temperature *C"
-                    temperatureTextView.setText(temperatureText);
+                    temperatureTextView.setText(temperature.toString());
                 }
                 else {
                     val temperatureText = "Error at getting temperature!";
