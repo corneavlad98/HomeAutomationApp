@@ -18,9 +18,10 @@ try:
         humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
         if humidity is not None and temperature is not None:
             #update 'temperature' and 'humidity' children
-            firebase.patch(DHT11_url + '/Temperature', {'Value*C': temperature})
-            firebase.patch(DHT11_url + '/Humidity', {'Value%': humidity})
-            print("sent DHT11 info to database, count: " , count)
+            if(temperature < 70):
+                firebase.patch(DHT11_url + '/Temperature', {'Value*C': temperature})
+                firebase.patch(DHT11_url + '/Humidity', {'Value%': humidity})
+                print("sent DHT11 info to database, count: " , count)
             count += 1
         else:
             print("error getting data from sensor!")

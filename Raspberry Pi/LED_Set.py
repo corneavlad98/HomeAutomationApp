@@ -2,7 +2,9 @@ import RPi.GPIO as GPIO
 import time
 import threading
 
+from pynput import keyboard
 from firebase import firebase
+
 LED_url = "https://homeautomationapp-42e27.firebaseio.com/RaspberryPi/LED"
 rgbLED_url = "https://homeautomationapp-42e27.firebaseio.com/RaspberryPi/LED/rgbLED"
 firebase = firebase.FirebaseApplication(LED_url)
@@ -47,18 +49,30 @@ def resetRGBValues():
     firebase.put(rgbLED_url, 'StartGreen', 0)
     firebase.put(rgbLED_url, 'StartBlue', 0)
 
-def turnOn(pin):   
-    if(pin == led1Pin):
-        if(discoValue == 0):
-            firebase.put(LED_url, 'StartNormal1', 1)  
+#Function for turning on/off normal LED
+def turnOnNormal(pin):
+    if(pin == led1Pin):  
+        firebase.put(LED_url, 'StartNormal1', 1)  
         time.sleep(0.1)   
         GPIO.output(pin,GPIO.HIGH)
-    if(pin == led2Pin):
-        if(discoValue == 0):
-            firebase.put(LED_url, 'StartNormal2', 1)
+    if(pin == led2Pin):     
+        firebase.put(LED_url, 'StartNormal2', 1)
         time.sleep(0.1)       
         GPIO.output(pin,GPIO.HIGH)
+        
+def turnOffNormal(pin):
+    if(pin == led1Pin):
+        firebase.put(LED_url, 'StartNormal1', 0) 
+        time.sleep(0.1)     
+        GPIO.output(pin,GPIO.LOW)
+    if(pin == led2Pin):
+        firebase.put(LED_url, 'StartNormal2', 0)
+        time.sleep(0.1)      
+        GPIO.output(pin,GPIO.LOW)
 
+
+
+def turnOn(pin):   
     if(pin == redPin):
         if(discoValue == 0):
             firebase.put(rgbLED_url, 'StartRed', 1)
@@ -71,20 +85,8 @@ def turnOn(pin):
         if(discoValue == 0):
             firebase.put(rgbLED_url, 'StartBlue', 1)
         GPIO.output(pin,GPIO.LOW)
-        
-        
-def turnOff(pin):
-    if(pin == led1Pin):
-        if(discoValue == 0):
-            firebase.put(LED_url, 'StartNormal1', 0) 
-        time.sleep(0.1)     
-        GPIO.output(pin,GPIO.LOW)
-    if(pin == led2Pin):
-        if(discoValue == 0):
-            firebase.put(LED_url, 'StartNormal2', 0)
-        time.sleep(0.1)      
-        GPIO.output(pin,GPIO.LOW)
-
+    
+def turnOff(pin): 
     if(pin == redPin):
         if(discoValue == 0):
             firebase.put(rgbLED_url, 'StartRed', 0)
@@ -98,11 +100,11 @@ def turnOff(pin):
             firebase.put(rgbLED_url, 'StartBlue', 0)
         GPIO.output(pin,GPIO.HIGH)
 
-def ledHandle(value, pin):
+def normalLedHandle(value, pin):
     if(value == 1):      
-        turnOn(pin)       
+        turnOnNormal(pin)       
     elif(value == 0):        
-        turnOff(pin)
+        turnOffNormal(pin)
 
 def rgbHandle(red, green, blue):
     #Red
@@ -160,12 +162,10 @@ def getValuesFromDb():
         print("LED1: " + str(led1Value) + " LED2: " + str(led2Value) + " R: " + str(redValue) + " G: " + str(greenValue) + " B: " + str(blueValue) + " Disco: " + str(discoValue))       
     print("getter thread stopped!")
 
-def handleLedValues():   
+def handleRGBLedValues():   
     while(threadStop is False):
         discoVal = firebase.get(rgbLED_url + '/Disco', '')
-        if(discoVal == 0):
-            ledHandle(led1Value, led1Pin)
-            ledHandle(led2Value, led2Pin)       
+        if(discoVal == 0):              
             rgbHandle(redValue, greenValue, blueValue)
         elif(discoVal == 1):
             count = 1
@@ -177,10 +177,17 @@ def handleLedValues():
                 count += 1
             firebase.put(rgbLED_url, 'StartLed', 0) 
             firebase.put(rgbLED_url, 'Disco', 0)
-               
-            
-               
-    print("handler thread stopped!")
+                
+    print("rgb handler stopped!")
+
+def handleNormalLed1():
+    while(threadStop is False):
+        normalLedHandle(led1Value, led1Pin)
+    print("led 1 handler stopped!")
+def handleNormalLed2():
+    while(threadStop is False):      
+        normalLedHandle(led2Value, led2Pin)
+    print("led 2 handler stopped!")
 
 def discoMode():
     #turn red on
@@ -226,22 +233,33 @@ def discoMode():
     time.sleep(0.5)
     
 try:
-    t1 = threading.Thread(target = getValuesFromDb)
-    t2 = threading.Thread(target = handleLedValues)
+    t1 = threading.Thread(target = getValuesFromDb, name = 'Values getter')
+    t2 = threading.Thread(target = handleNormalLed1, name = 'Led 1 handler')
+    t3 = threading.Thread(target = handleNormalLed2, name = 'Led 2 handler')
+    t4 = threading.Thread(target = handleRGBLedValues, name = 'RGB led handler')
     t1.start()     
     t2.start()       
+    t3.start()
+    t4.start()
+
     print("started: " + t1.getName())
     print("started: " + t2.getName())
+    print("started: " + t3.getName())
+    print("started: " + t4.getName())
 
-    print("program is running...")
-except KeyboardInterrupt:
+    print("program is running...")     
+
+    while True: time.sleep(100)
+except (KeyboardInterrupt, SystemExit):
+    resetRGBValues()
     global threadStop
     threadStop = True
-    print("exited program!")
+    print("exiting program!")
     GPIO.output(led1Pin,GPIO.LOW)
     GPIO.output(led2Pin,GPIO.LOW)
     GPIO.output(redPin,GPIO.HIGH)
     GPIO.output(greenPin,GPIO.HIGH)
     GPIO.output(bluePin,GPIO.HIGH)
+    
 
     
