@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        resetValues()
 
         //Temperature Activity start
         val openTemperatureButton = findViewById<ImageButton>(R.id.startTemperatureButton);
@@ -59,15 +60,16 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         //reset LEDs when pressing backbutton from MainActivity
-        myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
-        myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/Red").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/Green").setValue(0)
-        myDbReference.child("RaspberryPi/LED/rgbLED/Blue").setValue(0)
+        resetValues()
     }
     override fun onDestroy() {
         super.onDestroy()
         //reset LEDs when destroying (closing) MainActivity
+        resetValues()
+
+    }
+    private fun resetValues()
+    {
         myDbReference.child("RaspberryPi/LED/LED1").setValue(0)
         myDbReference.child("RaspberryPi/LED/LED2").setValue(0)
 

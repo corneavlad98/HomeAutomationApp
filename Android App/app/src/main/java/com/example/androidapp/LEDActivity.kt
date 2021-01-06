@@ -223,18 +223,18 @@ class LEDActivity : AppCompatActivity(){
 
                 if(redStart != null && greenStart != null && blueStart != null)
                 {
-                    if(redStart.toString().equals("1"))
+                    if(redStart.toString().equals("1") && greenStart.toString().equals("0") && blueStart.toString().equals("0"))
                         rgbLed.setImageResource(R.drawable.rgb_led_red)
-                    if(greenStart.toString().equals("1"))
+                    if(redStart.toString().equals("0") && greenStart.toString().equals("1") && blueStart.toString().equals("0"))
                         rgbLed.setImageResource(R.drawable.rgb_led_green)
-                    if(blueStart.toString().equals("1"))
+                    if(redStart.toString().equals("0") && greenStart.toString().equals("0") && blueStart.toString().equals("1"))
                         rgbLed.setImageResource(R.drawable.rgb_led_blue)
 
-                    if(redStart.toString().equals("1") && blueStart.toString().equals("1"))
+                    if(redStart.toString().equals("1") && greenStart.toString().equals("0") && blueStart.toString().equals("1"))
                         rgbLed.setImageResource(R.drawable.rgb_led_magenta)
-                    if(greenStart.toString().equals("1") && blueStart.toString().equals("1"))
+                    if(redStart.toString().equals("0") && greenStart.toString().equals("1") && blueStart.toString().equals("1"))
                         rgbLed.setImageResource(R.drawable.rgb_led_cyan)
-                    if(redStart.toString().equals("1") && greenStart.toString().equals("1"))
+                    if(redStart.toString().equals("1") && greenStart.toString().equals("1") && blueStart.toString().equals("0"))
                         rgbLed.setImageResource(R.drawable.rgb_led_yellow)
 
                     if(redStart.toString().equals("1") && greenStart.toString().equals("1") && blueStart.toString().equals("1"))
