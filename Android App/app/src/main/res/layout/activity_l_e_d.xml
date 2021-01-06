@@ -65,7 +65,7 @@
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.715" />
+        app:layout_constraintVertical_bias="0.759" />
 
     <ImageButton
         android:id="@+id/normalLed2"
@@ -82,7 +82,7 @@
         app:layout_constraintHorizontal_bias="0.92"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.715" />
+        app:layout_constraintVertical_bias="0.759" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarLED"
@@ -129,10 +129,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832" />
+        app:layout_constraintTop_toBottomOf="@+id/normalLed1"
+        app:layout_constraintVertical_bias="0.284" />
 
     <TextView
         android:id="@+id/normalLedText2"
@@ -143,10 +143,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.822"
+        app:layout_constraintHorizontal_bias="0.829"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832" />
+        app:layout_constraintTop_toBottomOf="@+id/normalLed2"
+        app:layout_constraintVertical_bias="0.284" />
 
     <Button
         android:id="@+id/magentaButton"
