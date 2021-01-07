@@ -36,5 +36,12 @@ RGB LED:
   <img src="images/led_activity3.png" alt="Your image title" width="250"/>
 </p>
 
+The third app is called "IP Camera App" and it's an app ment to access an IP Camera URL. The main part features a web view that loads the given URL and a gear icon in the top-left part of the app. The gear icon brings us to the settings page where we input the IP, username and password required in the URL. After clicking the submit button, the URL is saved in the phone's memory.
+
+<p align="center">
+  <img src="images/camera_activity.png" alt="Your image title" width="250"/>
+  <img src="images/camera_settings.png" alt="Your image title" width="250"/>
+  <img src="images/camera_activity2.png" alt="Your image title" width="250"/>
+</p>
 Link to demo videos: https://drive.google.com/drive/folders/132qKDnEFe9LzbR2WHRT7ukvcjjZBbYHf?usp=sharing
 
