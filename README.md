@@ -10,10 +10,31 @@ Firebase is used to link the two and provide real-time data about the DHT11 sens
 
 Here is how the main menu of the app looks like:
 <p align="center">
-  <img src="https://github.com/corneavlad98/HomeAutomationApp/blob/main/HomeAutomationApp.jpg" alt="Your image title" width="250"/>
+  <img src="images/HomeAutomationApp.jpg" alt="Your image title" width="250"/>
 </p>
 
 The first app is called "Temperature App" and it's an activity that listenes for changes made in the "DHT11" node of the Real Time Database. The RPI runs the temperature script that sends data to the database whenever the sensor detects changes in humidity & temperature.
+
+<p align="center">
+  <img src="images/temp_activity_edited.png" alt="Your image title" width="250"/>
+  <img src="images/temp_firebase_edited.png" alt="Your image title" width="250"/>
+  <img src="images/temp_activity2_edited.png" alt="Your image title" width="250"/>
+</p>
+
+The second app is called "LED App" and it's an activity that changes the color of the LEDs connected to the RPI with the help of a script. It can turn on 2 normal red LEDs and one RGB LED with multiple colors. It also features animations for every color change; animations were synchronised to match the real life color change (see the video section).
+
+Normal LEDs:
+<p align="center">
+  <img src="images/led_activity.png" alt="Your image title" width="250"/>
+  <img src="images/led_firebase.png" alt="Your image title" width="250"/>
+  <img src="images/led_activity2.png" alt="Your image title" width="250"/>
+</p>
+RGB LED:
+<p align="center">
+  <img src="images/led_activity.png" alt="Your image title" width="250"/>
+  <img src="images/led_firebase2.png" alt="Your image title" width="250"/>
+  <img src="images/led_activity3.png" alt="Your image title" width="250"/>
+</p>
 
 Link to demo videos: https://drive.google.com/drive/folders/132qKDnEFe9LzbR2WHRT7ukvcjjZBbYHf?usp=sharing
 
