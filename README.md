@@ -43,5 +43,15 @@ The third app is called "IP Camera App" and it's an app ment to access an IP Cam
   <img src="images/camera_settings.png" alt="Your image title" width="250"/>
   <img src="images/camera_activity2.png" alt="Your image title" width="250"/>
 </p>
+
+The fourth and final app is called "ZWave App" and it's an app ment to controll ZWave compatible devices. The RPI has a server module connected to it that hosts the ZWave server. The app loads the ZWave remote URL ("https://find.z-wave.me/zboxweb/r//") where you input your RemoteId, login and password to enter the dashboard. There, you can see your already connected devices, you can add and remove devices, toggle them, and so on.
+!Note! The dashboard was not made by me! I merely made the connection to the default ZWave remote URL in the application.
+
+<p align="center">
+  <img src="images/zwave_activity.png" alt="Your image title" width="250"/>
+  <img src="images/zwave_activity2.png" alt="Your image title" width="250"/>
+  <img src="images/zwave_activity3.png" alt="Your image title" width="250"/>
+</p>
+
 Link to demo videos: https://drive.google.com/drive/folders/132qKDnEFe9LzbR2WHRT7ukvcjjZBbYHf?usp=sharing
 
