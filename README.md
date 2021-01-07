@@ -4,7 +4,9 @@ An Android application for monitoring and controlling devices around the house.
 The main purpose of this app was to bring together some already-existing technology in my house and provide a simple & clean UI to monitor and controll them. Also, it provided a good training and exercise in the Android development area.
 
 User interface of the app is developed in Android Studio.
-Raspberry Pi is the backend of the app that runs Python scripts to send/receive data to and from the Real Time Database. The RPI has connected to it LEDs, a temperature sensor (DHT11) and a Z-Wave module that provides connection to Z-Wave devices (in my case, a smart socket and a temperature/humidity sensor). The IP camera is connected to the same network as the RPI and smartphone.
+Raspberry Pi is the backend of the app that runs Python scripts to send/receive data to and from the database. 
+Firebase is the web API that is used to connect the two where we use a Real Time Database for sharing data.
+The RPI has connected to it LEDs, a temperature sensor (DHT11) and a Z-Wave module that provides connection to Z-Wave devices (in my case, a smart socket and a temperature/humidity sensor). The IP camera is connected to the same network as the RPI and smartphone.
 
 Firebase is used to link the two and provide real-time data about the DHT11 sensor and LEDs.
 
