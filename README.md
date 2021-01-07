@@ -6,9 +6,9 @@ The main purpose of this app was to bring together some already-existing technol
 User interface of the app is developed in Android Studio.
 Raspberry Pi is the backend of the app that runs Python scripts to send/receive data to and from the database. 
 Firebase is the web API that is used to connect the two where we use a Real Time Database for sharing data.
-The RPI has connected to it LEDs, a temperature sensor (DHT11) and a Z-Wave module that provides connection to Z-Wave devices (in my case, a smart socket and a temperature/humidity sensor). The IP camera is connected to the same network as the RPI and smartphone.
 
-Firebase is used to link the two and provide real-time data about the DHT11 sensor and LEDs.
+
+The RPI has connected to it LEDs, a temperature sensor (DHT11) and a Z-Wave module that provides connection to Z-Wave devices (in my case, a smart socket and a temperature/humidity sensor). The IP camera is connected to the same network as the RPI and smartphone.
 
 Here is how the main menu of the app looks like:
 <p align="center">
